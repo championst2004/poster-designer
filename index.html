@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Wall Poster Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application uses a two-panel responsive layout. The left panel contains all user controls (wall dimensions, unit selection, poster management, and layout suggestions), providing a centralized location for input. The right panel is a dedicated visualization canvas that displays the wall and posters in real-time. This structure was chosen to create an intuitive user flow where configuration and immediate visual feedback are separated but concurrently visible, which is ideal for a design tool. The user can adjust settings and instantly see the result, facilitating quick iteration and planning. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: User-defined wall and poster dimensions, positions, and units, now including user-uploaded images.
+        - Goal: To allow users to visually plan and experiment with arrangements of their own photos in a defined space.
+        - Viz/Presentation Method: The wall and posters are represented by scaled HTML `div` elements. Poster divs now use the `backgroundImage` property to display user-uploaded photos, which are stored as base64 data URLs in the application's state.
+        - Interaction: Users upload a photo, define its print dimensions, and add it to the canvas. They can then drag and drop posters and apply automated layout suggestions. All inputs provide real-time visual updates.
+        - Justification: Direct manipulation via drag-and-drop is the most intuitive interface. Using `div` elements with background images is a lightweight and effective way to render the posters without the need for a complex canvas library. Storing images as data URLs keeps the application entirely client-side.
+        - Library/Method: Vanilla JavaScript for all DOM manipulation, state management, and interaction logic, including file handling with the FileReader API.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div id="app" class="flex flex-col md:flex-row h-screen w-screen overflow-hidden">
+        
+        <!-- Controls Panel -->
+        <div class="w-full md:w-80 lg:w-96 bg-white border-r border-slate-200 p-6 flex flex-col space-y-6 overflow-y-auto control-panel">
+            <header>
+                <h1 class="text-2xl font-bold text-slate-900">Photo Wall Planner</h1>
+                <p class="text-sm text-slate-500 mt-1">Design your perfect gallery wall.</p>
+            </header>
+            
+            <!-- Wall Settings -->
+            <div class="space-y-4 border-t border-slate-200 pt-4">
+                <h2 class="text-lg font-semibold text-slate-700">1. Set Up Your Wall</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="wallWidth" class="block text-sm font-medium text-slate-600">Width</label>
+                        <input type="number" id="wallWidth" value="400" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="wallHeight" class="block text-sm font-medium text-slate-600">Height</label>
+                        <input type="number" id="wallHeight" value="250" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label for="units" class="block text-sm font-medium text-slate-600">Units</label>
+                    <select id="units" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <option value="cm" selected>Centimeters (cm)</option>
+                        <option value="in">Inches (in)</option>
+                        <option value="ft">Feet (ft)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Add Poster -->
+            <div class="space-y-4 border-t border-slate-200 pt-4">
+                <h2 class="text-lg font-semibold text-slate-700">2. Add Photos</h2>
+                <div>
+                    <label for="posterImage" class="block text-sm font-medium text-slate-600">Upload Your Photo</label>
+                    <div class="mt-1">
+                        <input type="file" id="posterImage" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer">
+                    </div>
+                    <div id="imagePreviewContainer" class="mt-2 hidden">
+                         <img id="imagePreview" src="" alt="Image Preview" class="max-h-24 rounded-md border border-slate-300">
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500">Set the print dimensions for your photo below.</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="posterWidth" class="block text-sm font-medium text-slate-600">Width</label>
+                        <input type="number" id="posterWidth" placeholder="50" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="posterHeight" class="block text-sm font-medium text-slate-600">Height</label>
+                        <input type="number" id="posterHeight" placeholder="70" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                </div>
+                 <div>
+                    <label for="standardSizes" class="block text-sm font-medium text-slate-600">Or pick a standard print size</label>
+                    <select id="standardSizes" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <option value="">Custom</option>
+                        <optgroup label="ISO 'A' Sizes (cm)">
+                            <option value="21.0,29.7">A4 (21 x 29.7)</option>
+                            <option value="29.7,42.0">A3 (29.7 x 42)</option>
+                            <option value="42.0,59.4">A2 (42 x 59.4)</option>
+                            <option value="59.4,84.1">A1 (59.4 x 84.1)</option>
+                        </optgroup>
+                        <optgroup label="Common Inches">
+                            <option value="8,10">8" x 10"</option>
+                            <option value="11,14">11" x 14"</option>
+                            <option value="16,20">16" x 20"</option>
+                            <option value="18,24">18" x 24"</option>
+                            <option value="24,36">24" x 36"</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <button id="addPosterBtn" class="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition disabled:bg-slate-400" disabled>
+                    Add Photo to Wall
+                </button>
+            </div>
+
+            <!-- Layout Suggestions -->
+            <div class="space-y-4 border-t border-slate-200 pt-4">
+                <h2 class="text-lg font-semibold text-slate-700">3. Arrange</h2>
+                <p class="text-sm text-slate-500">Drag photos on the wall or use a suggestion.</p>
+                <div class="grid grid-cols-2 gap-2">
+                     <button id="layoutGrid" class="w-full bg-slate-200 text-slate-700 font-semibold py-2 px-3 text-sm rounded-md hover:bg-slate-300 transition">Grid</button>
+                    <button id="layoutHorizontal" class="w-full bg-slate-200 text-slate-700 font-semibold py-2 px-3 text-sm rounded-md hover:bg-slate-300 transition">Horizontal</button>
+                    <button id="layoutVertical" class="w-full bg-slate-200 text-slate-700 font-semibold py-2 px-3 text-sm rounded-md hover:bg-slate-300 transition">Vertical</button>
+                    <button id="clearAllBtn" class="w-full bg-red-500 text-white font-semibold py-2 px-3 text-sm rounded-md hover:bg-red-600 transition col-span-2">Clear All Photos</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualization Canvas -->
+        <div id="canvasContainer" class="flex-1 bg-slate-100 flex items-center justify-center p-4 md:p-8 overflow-hidden">
+            <div id="wall" class="wall-canvas relative">
+                <!-- Posters will be appended here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
