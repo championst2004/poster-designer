@@ -4,7 +4,6 @@
         }
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
         .wall-canvas {
-            background-color: #f4f2ed;
             background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
             background-size: 20px 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -24,7 +23,7 @@
             background-color: #e2e8f0;
         }
         .poster:hover {
-            box-shadow: 0 6px burdensome rgba(0,0,0,0.25);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
             transform: scale(1.02);
         }
         .poster.dragging {
