@@ -59,28 +59,28 @@ Design your perfect wall poster layout with ease. The **AI Wall Poster Planner**
 ### 🧱 Wall Setup Panel
 > Set the dimensions and units of your wall before adding any posters.
 
-![Wall Setup Panel](../screenshots/SetUpWall.png)
+![Wall Setup Panel](./screenshots/SetUpWall.png)
 
 ---
 
 ### 🖼️ Poster Upload and Add Section
 > Upload images, choose print sizes, and add them to your wall canvas.
 
-![Poster Upload Section](../screenshots/Upload-Photos.png)
+![Poster Upload Section](./screenshots/Upload-Photos.png)
 
 ---
 
 ### 🔀 Poster Layout Modes
 > Arrange posters manually or use smart auto-layout suggestions.
 
-![Layout Modes](../screenshots/ArrangeClear.png)
+![Layout Modes](./screenshots/ArrangeClear.png)
 
 ---
 
 ### 🖱️ Drag-and-Drop Wall Canvas
 > Move posters freely and visualize your wall layout in real-time.
 
-![Full Site View](../screenshots/FullSite.png)
+![Full Site View](./screenshots/FullSite.png)
 
 ---
 
