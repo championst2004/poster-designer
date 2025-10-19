@@ -1,122 +1,34 @@
-# 🖼️ AI Wall Poster Planner
+# AI Wall Poster Planner
 
-Design your perfect wall poster layout with ease. The **AI Wall Poster Planner** is a simple, web-based tool that helps you customize, visualize, and organize your wall posters before you ever hang them up.
+This is a simple web-based tool to help you design and visualize your wall poster arrangements.
 
----
+## Features
 
-## 🚀 Features
+*   **Wall Customization:** Set the dimensions of your wall (width and height) and choose the units (cm, in, ft).
+*   **Poster Management:**
+    *   Upload your own photos to use as posters.
+    *   Define the print dimensions for each poster.
+    *   Choose from standard print sizes.
+    *   Add multiple posters to the wall.
+*   **Real-time Visualization:** See a live preview of your poster arrangement on the wall.
+*   **Drag and Drop:** Easily move posters around the wall to find the perfect layout.
+*   **Layout Suggestions:** Automatically arrange posters in a grid, horizontal, or vertical layout.
+*   **Clear All:** Remove all posters from the wall with a single click.
 
-### 🎨 Wall Customization
-- Set the **dimensions** of your wall (width & height).
-- Choose your preferred **units**: centimeters (cm), inches (in), or feet (ft).
+## How to Use
 
-### 🖼️ Poster Management
-- **Upload your own photos** to turn them into posters.
-- Define **custom print dimensions** for each photo.
-- Choose from **standard print sizes** (e.g., A4, 8x10, 16x20, etc.).
-- Add **multiple posters** to your wall canvas.
+1.  **Set up your wall:** Enter the width and height of your wall and select the units.
+2.  **Add photos:**
+    *   Click "Upload Your Photo" to choose an image from your computer.
+    *   Set the print dimensions for the photo.
+    *   Click "Add Photo to Wall".
+3.  **Arrange your posters:**
+    *   Drag and drop the posters on the wall to arrange them as you like.
+    *   Use the "Grid", "Horizontal", or "Vertical" buttons for automatic layout suggestions.
+4.  **Clear the wall:** Click "Clear All Photos" to start over.
 
-### 🧩 Real-Time Visualization
-- Preview your poster arrangement **live** as you work.
-- View the posters **to scale** based on your wall settings.
+## Technologies Used
 
-### 🖱️ Drag and Drop Interaction
-- **Move and reposition** posters freely on the wall using drag-and-drop.
-
-### 🧠 Layout Suggestions
-- Automatically arrange posters using:
-  - **Grid Layout**
-  - **Horizontal Row**
-  - **Vertical Column**
-
-### 🗑️ Clear All Posters
-- Start fresh anytime with a single click using the **Clear All** button.
-
----
-
-## 🧑‍🏫 How to Use
-
-1. ### 🧱 Set Up Your Wall
-   - Input your wall's **width** and **height**.
-   - Select your desired **unit of measurement**.
-
-2. ### 📸 Upload and Add Posters
-   - Click **“Upload Your Photo”** to select images from your computer.
-   - Define the **print dimensions** (e.g., 8x10 inches).
-   - Click **“Add Photo to Wall”**.
-
-3. ### 🧩 Arrange Posters
-   - **Drag and drop** posters to position them manually.
-   - Use **layout buttons** (Grid, Horizontal, Vertical) for smart arrangements.
-
-4. ### 🔄 Reset Your Layout
-   - Click **“Clear All Photos”** to remove all posters and start over.
-
----
-
-## 🖥️ Screenshots
-
-### 🧱 Wall Setup Panel
-> Set the dimensions and units of your wall before adding any posters.
-
-![Wall Setup Panel](../screenshots/SetUpWall.png)
-
----
-
-### 🖼️ Poster Upload and Add Section
-> Upload images, choose print sizes, and add them to your wall canvas.
-
-![Poster Upload Section](../screenshots/Upload-Photos.png)
-
----
-
-### 🔀 Poster Layout Modes
-> Arrange posters manually or use smart auto-layout suggestions.
-
-![Layout Modes](../screenshots/ArrangeClear.png)
-
----
-
-### 🖱️ Drag-and-Drop Wall Canvas
-> Move posters freely and visualize your wall layout in real-time.
-
-![Full Site View](../screenshots/FullSite.png)
-
----
-
-
-## 🛠️ Tech Stack
-
-| 💻 Frontend | 🎨 Styling | 🧠 Logic / Interaction | 📦 Tooling |
-|------------|------------|------------------------|------------|
-| ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) | ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) | ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) | ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) |
-| ![Canvas API](https://img.shields.io/badge/Canvas_API-333333?style=for-the-badge&logo=code&logoColor=white) |  | ![Drag & Drop](https://img.shields.io/badge/Drag_and_Drop-555555?style=for-the-badge&logo=mouse&logoColor=white) |  |
-
-
-
----
-
-## 📦 Future Improvements
-
-- Save/export layout as image or PDF
-- Add poster rotation and frame options
-- Snap-to-grid or alignment guides
-- Wall color or texture customization
-- Mobile responsive version
-- User accounts to save designs
-
----
-
-## 📄 License
-
-MIT License 
-
----
-
-## 🙌 Acknowledgements
-
-- Built using vanilla JavaScript, HTML5 Canvas, and TailwindCSS.
-- Poster layout logic inspired by common photo wall framing techniques.
-
----
-
+*   HTML
+*   CSS (Tailwind CSS)
+*   JavaScript
