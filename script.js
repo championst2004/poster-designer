@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const wallWidthInput = document.getElementById('wallWidth');
         const wallHeightInput = document.getElementById('wallHeight');
         const unitsSelect = document.getElementById('units');
+        const wallColorInput = document.getElementById('wallColor');
         const posterWidthInput = document.getElementById('posterWidth');
         const posterHeightInput = document.getElementById('posterHeight');
         const standardSizesSelect = document.getElementById('standardSizes');
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const layoutGridBtn = document.getElementById('layoutGrid');
         const layoutHorizontalBtn = document.getElementById('layoutHorizontal');
         const layoutVerticalBtn = document.getElementById('layoutVertical');
+
 
         let state = {
             wall: {
@@ -268,6 +270,10 @@ document.addEventListener('DOMContentLoaded', () => {
         layoutGridBtn.addEventListener('click', applyGridLayout);
         layoutHorizontalBtn.addEventListener('click', applyHorizontalLayout);
         layoutVerticalBtn.addEventListener('click', applyVerticalLayout);
+
+        wallColorInput.addEventListener('input', () => {
+            wall.style.backgroundColor = wallColorInput.value;
+        });
         
         const resizeObserver = new ResizeObserver(() => render());
         resizeObserver.observe(canvasContainer);
