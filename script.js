@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const layoutGridBtn = document.getElementById('layoutGrid');
         const layoutHorizontalBtn = document.getElementById('layoutHorizontal');
         const layoutVerticalBtn = document.getElementById('layoutVertical');
+        const exportImageBtn = document.getElementById('exportImageBtn');
 
 
         let state = {
@@ -259,6 +260,57 @@ document.addEventListener('DOMContentLoaded', () => {
             render();
         }
 
+        async function exportWallAsImage() {
+            if (state.posters.length === 0) {
+                alert('Add some posters to the wall first!');
+                return;
+            }
+
+            // Temporarily scale up the wall for higher resolution capture
+            const originalScale = state.scale;
+            const exportScale = 3; // Export at 3x current resolution
+
+            // Adjust wall and poster sizes for export
+            wall.style.width = `${state.wall.width * exportScale}px`;
+            wall.style.height = `${state.wall.height * exportScale}px`;
+            state.posters.forEach(poster => {
+                const posterEl = wall.querySelector(`[data-id='${poster.id}']`);
+                if (posterEl) {
+                    posterEl.style.width = `${poster.width * exportScale}px`;
+                    posterEl.style.height = `${poster.height * exportScale}px`;
+                    posterEl.style.left = `${poster.x * exportScale}px`;
+                    posterEl.style.top = `${poster.y * exportScale}px`;
+                }
+            });
+
+            // Use html2canvas to capture the wall div
+            const canvas = await html2canvas(wall, {
+                scale: 1, // html2canvas will use the already scaled-up DOM
+                useCORS: true, // Important for images loaded from data URLs
+                allowTaint: true // Allow tainting the canvas with cross-origin images (if any, though data URLs should be fine)
+            });
+
+            // Revert wall and poster sizes to original scale
+            wall.style.width = `${state.wall.width * originalScale}px`;
+            wall.style.height = `${state.wall.height * originalScale}px`;
+            state.posters.forEach(poster => {
+                const posterEl = wall.querySelector(`[data-id='${poster.id}']`);
+                if (posterEl) {
+                    posterEl.style.width = `${poster.width * originalScale}px`;
+                    posterEl.style.height = `${poster.height * originalScale}px`;
+                    posterEl.style.left = `${poster.x * originalScale}px`;
+                    posterEl.style.top = `${poster.y * originalScale}px`;
+                }
+            });
+            render(); // Re-render to ensure everything is back to normal
+
+            // Create a link to download the image
+            const link = document.createElement('a');
+            link.download = 'poster-wall-design.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
         wallWidthInput.addEventListener('input', updateWallDimensions);
         wallHeightInput.addEventListener('input', updateWallDimensions);
         unitsSelect.addEventListener('change', updateWallDimensions);
@@ -270,6 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
         layoutGridBtn.addEventListener('click', applyGridLayout);
         layoutHorizontalBtn.addEventListener('click', applyHorizontalLayout);
         layoutVerticalBtn.addEventListener('click', applyVerticalLayout);
+        exportImageBtn.addEventListener('click', exportWallAsImage);
 
         wallColorInput.addEventListener('input', () => {
             wall.style.backgroundColor = wallColorInput.value;
