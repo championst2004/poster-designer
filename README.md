@@ -108,7 +108,7 @@ Design your perfect wall poster layout with ease. The **AI Wall Poster Planner**
 
 ## 📄 License
 
-MIT License *(or specify your license here)*
+[MIT License](https://github.com/championst2004/poster-designer/blob/main/LICENSE)
 
 ---
 
