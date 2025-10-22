@@ -1,0 +1,21 @@
+{
+  "name": "poster-designer",
+  "version": "1.0.0",
+  "description": "Design your perfect wall poster layout with ease. The **AI Wall Poster Planner** is a simple, web-based tool that helps you customize, visualize, and organize your wall posters before you ever hang them up.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/p0ized/poster-designer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/p0ized/poster-designer/issues"
+  },
+  "homepage": "https://github.com/p0ized/poster-designer#readme"
+}

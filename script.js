@@ -325,12 +325,28 @@ document.addEventListener('DOMContentLoaded', () => {
         exportImageBtn.addEventListener('click', exportWallAsImage);
 
         wallColorInput.addEventListener('input', () => {
-            wall.style.backgroundColor = wallColorInput.value;
-        });
-        
+      const color = wallColorInput.value;
+      wall.style.backgroundColor = color;
+      wall.style.setProperty('--wall-color', color); // ✅ this keeps wall color consistent in dark mode
+     });
         const resizeObserver = new ResizeObserver(() => render());
         resizeObserver.observe(canvasContainer);
         
         updateWallDimensions();
         render();
+        // 🌙 DARK MODE TOGGLE
+const darkModeToggle = document.getElementById('darkModeToggle');
+
+// Apply saved theme
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+}
+
+// Toggle theme on click
+darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+});
+
     });
+
