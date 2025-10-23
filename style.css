@@ -45,4 +45,73 @@
         .control-panel::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
-    
+/* Normal light mode styles */
+body {
+  background-color: #fff;
+  color: #000;
+  font-family: sans-serif;
+}
+
+/* 🌙 Dark Mode Styles (Improved) */
+
+/* Only UI darkens, not the wall */
+body.dark {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Panel dark mode */
+body.dark .control-panel {
+  background-color: #1e1e1e;
+}
+
+/* Inputs and dropdowns */
+body.dark input,
+body.dark select,
+body.dark textarea {
+  background-color: #222;
+  color: #eee;
+  border: 1px solid #555;
+}
+
+/* ✅ Wall keeps its custom color in dark mode */
+body.dark #wall {
+  background-color: var(--wall-color, inherit) !important;
+}
+
+/* Buttons */
+body.dark button {
+  background-color: #444;
+  color: #fff;
+}
+
+/* 🌙 Small Floating Dark Mode Button */
+#darkModeToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+#darkModeToggle:hover {
+  background-color: #555;
+}
+
+body.dark #darkModeToggle {
+  background-color: #eee;
+  color: #000;
+}
+
+body.dark #canvasContainer {
+  background-color: #121212; /* dark surroundings */
+}
